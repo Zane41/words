@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 
         vivod(countWords(reading("INPUT.txt")));
-
+        zamena(createChangebleMap(reading("INPUT.txt")), createCript(reading("INPUT2.txt")));
 
     }
 
@@ -26,7 +26,7 @@ public class Main {
         }
         for (String x:tempHash.keySet()){
             if (tempHash.get(x)==temp){
-                otvet=x+" & "+otvet;
+                otvet=otvet+" & "+x;
             }
             if(tempHash.get(x)>temp){
                 temp=tempHash.get(x); otvet=x;
@@ -49,13 +49,30 @@ public class Main {
         vvod.close();
         return list;
     }
-    public static void zamena (HashMap<String,Integer> changebleMap, HashMap<String, String> criptedMap){
-
+    public static void zamena (HashMap<Integer,String> changebleMap, HashMap<String, String> criptedMap){
+        for (Integer c:changebleMap.keySet()) {
+            for (String x : changebleMap.values()) {
+                if (changebleMap.get(c) == x && criptedMap.containsKey(x)){
+                    changebleMap.put(c, criptedMap.get(x));
+                    System.out.println(changebleMap.get(c));
+                }
+            }
+        }
     }
     public static HashMap<String , String> createCript (ArrayList<String> list){
-        HashMap<String, String> cript = new HashMap<>();
-        for (String x: list)
-            cript.put(x.substring(), x.substring())
+        HashMap<String, String> cript = new HashMap<>(); String [] temp;
+        for (String x: list) {
+            temp = x.split(" ");
+            cript.put(temp[0], temp[1]);
+        }
     return cript;
+    }
+    public static HashMap<Integer , String> createChangebleMap (ArrayList<String> list){
+        HashMap<Integer, String> change = new HashMap<>();
+        int i =0;
+        for (String x: list) {
+            change.put(i+1, x);
+        }
+        return change;
     }
 }
