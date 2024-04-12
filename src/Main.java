@@ -25,9 +25,13 @@ public class Main {
             else tempHash.put(x, 1);
         }
         for (String x:tempHash.keySet()){
+            if (tempHash.get(x)==temp){
+                otvet=x+" & "+otvet;
+            }
             if(tempHash.get(x)>temp){
                 temp=tempHash.get(x); otvet=x;
         }
+
         }
     return otvet;
     }
