@@ -43,10 +43,19 @@ public class Main {
     public static ArrayList<String> reading(String file) throws FileNotFoundException {
         Scanner vvod = new Scanner(new File(file));
         ArrayList<String> list = new ArrayList<>();
-        while (vvod.hasNext()) {
-            list.add(vvod.next());
+        while (vvod.hasNextLine()) {
+            list.add(vvod.nextLine());
         }
         vvod.close();
         return list;
+    }
+    public static void zamena (HashMap<String,Integer> changebleMap, HashMap<String, String> criptedMap){
+
+    }
+    public static HashMap<String , String> createCript (ArrayList<String> list){
+        HashMap<String, String> cript = new HashMap<>();
+        for (String x: list)
+            cript.put(x.substring(), x.substring())
+    return cript;
     }
 }
