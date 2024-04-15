@@ -1,8 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -10,7 +8,7 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 
         vivod(countWords(reading("INPUT.txt")));
-        zamena(createChangebleMap(reading("INPUT.txt")), createCript(reading("INPUT2.txt")));
+        zamena(createChangebleMap(reading2("INPUT.txt")), createCript(reading("INPUT2.txt")));
 
     }
 
@@ -49,15 +47,24 @@ public class Main {
         vvod.close();
         return list;
     }
+    public static ArrayList<String> reading2(String file) throws FileNotFoundException {
+        Scanner vvod = new Scanner(new File(file));
+        ArrayList<String> list = new ArrayList<>();
+        while (vvod.hasNext()) {
+            list.add(vvod.next());
+        }
+        vvod.close();
+        return list;
+    }
     public static void zamena (HashMap<Integer,String> changebleMap, HashMap<String, String> criptedMap){
         for (Integer c:changebleMap.keySet()) {
-            for (String x : changebleMap.values()) {
-                if (changebleMap.get(c) == x && criptedMap.containsKey(x)){
-                    changebleMap.put(c, criptedMap.get(x));
-                    System.out.println(changebleMap.get(c));
+            for (String x : criptedMap.keySet()) {
+                if (changebleMap.get(c).equals(x)){
+                    changebleMap.replace(c, criptedMap.get(x));
                 }
             }
         }
+        System.out.println(changebleMap.values());
     }
     public static HashMap<String , String> createCript (ArrayList<String> list){
         HashMap<String, String> cript = new HashMap<>(); String [] temp;
@@ -71,7 +78,8 @@ public class Main {
         HashMap<Integer, String> change = new HashMap<>();
         int i =0;
         for (String x: list) {
-            change.put(i+1, x);
+            change.put(i, x);
+            i++;
         }
         return change;
     }
